@@ -17,6 +17,25 @@ class PROCEDURALGENERATION_API AdefaultlTerrain : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AdefaultlTerrain();
+	UPROPERTY(EditAnywhere)
+	UMaterialInterface* Material;
+	UPROPERTY(EditAnywhere)
+	float SEED;
+	UPROPERTY(EditAnywhere)
+	int Size;
+	UPROPERTY(EditAnywhere)
+	int Scale;
+	UPROPERTY(EditAnywhere)
+	float Height;
+	UPROPERTY(EditAnywhere)
+	float TerrainSmoothness = 1;
+	
+private:
+	UProceduralMeshComponent* Landscape;
+	TArray<FVector> Vertices;
+	TArray<int32> Triangles;
+	TArray<FVector2D> UV0;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,6 +45,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UProceduralMeshComponent* Landscape;
-
+private:
+	void ConstructVeritces();
+	void ConstructTriangles();
+	void BuildLandscape();
 };
