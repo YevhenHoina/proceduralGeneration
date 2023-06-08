@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Math/IntVector.h"
 #include "Player_Character.generated.h"
 
 UCLASS()
@@ -33,6 +34,11 @@ class PROCEDURALGENERATION_API APlayer_Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
 	
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	int RenderDistance;
+
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> ChunkType;
 
 public:
 	// Sets default values for this character's properties
@@ -46,11 +52,14 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	FIntVector GetCurrentChunk();
+
+	void GenerateChunks();
+
 protected:
 	// Called when the game starts or when spawned
-	
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
 public:	

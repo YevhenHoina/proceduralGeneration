@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "defaultlTerrain.generated.h"
+#include "defaultTerrain.generated.h"
 
 class UProceduralMeshComponent;
 
@@ -22,15 +22,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	float SEED;
 	UPROPERTY(EditAnywhere)
-	int Size;
+	float Height = 10000;
 	UPROPERTY(EditAnywhere)
-	int Scale;
-	UPROPERTY(EditAnywhere)
-	float Height;
-	UPROPERTY(EditAnywhere)
-	float TerrainSmoothness = 1;
-	UPROPERTY(EditAnywhere)
-	float Param;
+	float TerrainSmoothness = 1000;
+
+	const int Size = 10;
+	const int Scale = 100;
 	
 private:
 	UProceduralMeshComponent* Landscape;
@@ -47,6 +44,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void ShowChunks(bool shown);
+	
+	
 
 private:
 	void ConstructVeritces();

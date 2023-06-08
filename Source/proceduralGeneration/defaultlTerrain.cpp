@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "defaultlTerrain.h"
+#include "defaultTerrain.h"
 #include "ProceduralMeshComponent.h"
 #include "Containers/UnrealString.h"
 #include "GameFramework/Actor.h"
@@ -63,7 +63,7 @@ void AdefaultlTerrain::ConstructVeritces()
 	{
 		for (int Y = 0; Y <= Size; Y++)
 		{
-			globalZ = Height * FMath::PerlinNoise2D(FVector2D((globalX + X + 0.01) * 0.01, (globalY + Y + 0.01) * 0.01)) + TerrainSmoothness * FMath::PerlinNoise2D(FVector2D((globalX + 0.1), (globalY + 0.1)));
+			globalZ = Height * FMath::PerlinNoise2D(FVector2D((globalX + X + 0.01) * 0.001, (globalY + Y + 0.01) * 0.001)) + TerrainSmoothness * FMath::PerlinNoise2D(FVector2D((globalX + X + 0.01) * 0.01, (globalY + Y + 0.01) * 0.01));
 			Vertices.Add(FVector(X * Scale, Y * Scale, globalZ));
 			UV0.Add(FVector2D(X * Size, Y * Size));
 		}
@@ -105,7 +105,7 @@ void AdefaultlTerrain::ShowChunks(bool shown) {
 		DrawDebugLine(GetWorld(), point1, point2, FColor::Red, true, 100);
 
 		//uncomment to show all lines
-		/*point1 = FVector(GetActorLocation().X + Size * Scale, GetActorLocation().Y, -1000);
+		point1 = FVector(GetActorLocation().X + Size * Scale, GetActorLocation().Y, -1000);
 		point2 = FVector(GetActorLocation().X + Size * Scale, GetActorLocation().Y, 10000);
 		DrawDebugLine(GetWorld(), point1, point2, FColor::Red, true, 100);
 
@@ -115,7 +115,7 @@ void AdefaultlTerrain::ShowChunks(bool shown) {
 
 		point1 = FVector(GetActorLocation().X + Size * Scale, GetActorLocation().Y + Size * Scale, -1000);
 		point2 = FVector(GetActorLocation().X + Size * Scale, GetActorLocation().Y + Size * Scale, 10000);
-		DrawDebugLine(GetWorld(), point1, point2, FColor::Blue, true, 100);*/
+		DrawDebugLine(GetWorld(), point1, point2, FColor::Blue, true, 100);
 	}
 
 
