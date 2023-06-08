@@ -29,6 +29,8 @@ public:
 	float Height;
 	UPROPERTY(EditAnywhere)
 	float TerrainSmoothness = 1;
+	UPROPERTY(EditAnywhere)
+	float Param;
 	
 private:
 	UProceduralMeshComponent* Landscape;
@@ -36,17 +38,18 @@ private:
 	TArray<int32> Triangles;
 	TArray<FVector2D> UV0;
 
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void ShowChunks(bool shown);
 
 private:
 	void ConstructVeritces();
 	void ConstructTriangles();
-	void BuildLandscape();
+	void BuildChunk();
 };
